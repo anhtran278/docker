@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  backend:
+    build:
+      context: ./be-master
+      dockerfile: dockerfile.backend
+    ports:
+      - "3002:3000"
+    volumes:
+      - ./be-master:/app/backend
+      - ./be-master:/app/node_modules
+    env_file:
+      - ./be-master/.env
+    depends_on:
+      - frontend
+  frontend:
+    build:
+      context: ./fe-master
+      dockerfile: dockerfile.frontend
+    ports:
+      - "3001:80"
+    volumes:
+      - ./fe-master:/app/frontend
+    env_file:
+      - ./fe-master/.env

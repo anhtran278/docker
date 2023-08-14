@@ -1,0 +1,18 @@
+# Sử dụng image base cho ứng dụng Node.js
+FROM node:18.16.1
+
+# Tạo thư mục làm việc
+WORKDIR /app/backend
+
+# Copy package.json và package-lock.json vào thư mục làm việc
+COPY package*.json package-lock*.json ./ 
+
+RUN npm i
+
+# Copy mã nguồn Node.js app
+COPY . .
+
+EXPOSE 3001
+
+# Chạy ứng dụng Node.js
+CMD ["npm", "start"]
